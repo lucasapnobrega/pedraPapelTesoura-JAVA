@@ -8,78 +8,78 @@ public class Principal {
 		String sim = "sim";
 		String nao = "nao";
 		
+		int jogGanhou = 0;
+		int pcGanhou = 0;
+		int empate = 0;
+		
 		boolean continuar = true;
 		boolean palavraContinuar = true;
 		
 		while(continuar) {
 			
-			Secundaria.menu();
+			Secundaria.menu(); // função MENU
+			
 			int opcaoJog = entrada.nextInt();
-			int opcaoPc = Secundaria.sorteioNum();
+			
+			int opcaoPc = Secundaria.sorteioNum(); // função do sorteio
 			
 			while(opcaoJog < 0 || opcaoJog > 2) {
 				Secundaria.menuErro();
 				opcaoJog = entrada.nextInt();
 			}
 			
-			
-			switch(opcaoPc) {
-			
-				case 0:
-					
-					System.out.println("\nO computador escolheu PEDRA.");
-					break;
-					
-				case 1:
-					System.out.println("\nO computador escolheu PAPEL.");
-					break;
-					
-				case 2:
-					System.out.println("\nO computador escolheu TESOURA.");
-					break;
-					
-			}
+			Secundaria.menuPc(opcaoPc); // função escolha do PC
 			
 			switch(opcaoJog) {
 			
-				case 0:
-					System.out.println("Você escolheu PEDRA.");
-					
-					if(opcaoPc == 1) {
-						System.out.println("O computador ganhou, mais sorte da próxima vez!");
-					} else if(opcaoPc == 2) {
-						System.out.println("Parabéns, você ganhou!");
-					} else {
-						System.out.println("EMPATE! Ambos escolheram PEDRA.");
-					}
-					
-					break;
-					
-				case 1:
-					System.out.println("Você escolheu PAPEL.");
-					
-					if(opcaoPc == 0) {
-						System.out.println("Parabéns, você ganhou!");
-					} else if(opcaoPc == 2) {
-						System.out.println("O computador ganhou, mais sorte da próxima vez!");
-					} else {
-						System.out.println("EMPATE! Ambos escolheram PAPEL.");
-					}
-					
-					break;
-					
-				case 2:
-					System.out.println("Você escolheu TESOURA.");
-					
-					if(opcaoPc == 0) {
-						System.out.println("O computador ganhou, mais sorte da próxima vez!");
-					} else if(opcaoPc == 1) {
-						System.out.println("Parabéns, você ganhou!");
-					} else {
-						System.out.println("EMPATE! Ambos escolheram TESOURA.");
-					}
-					
-					break;
+			case 0:
+				System.out.println("Você escolheu PEDRA.");
+				
+				if(opcaoPc == 1) {
+					System.out.println("O computador ganhou, mais sorte da próxima vez!");
+					pcGanhou++;
+				} else if(opcaoPc == 2) {
+					System.out.println("Parabéns, você ganhou!");
+					jogGanhou++;
+				} else {
+					System.out.println("EMPATE! Ambos escolheram PEDRA.");
+					empate++;
+				}
+				
+				break;
+				
+			case 1:
+				System.out.println("Você escolheu PAPEL.");
+				
+				if(opcaoPc == 0) {
+					System.out.println("Parabéns, você ganhou!");
+					jogGanhou++;
+				} else if(opcaoPc == 2) {
+					System.out.println("O computador ganhou, mais sorte da próxima vez!");
+					pcGanhou++;
+				} else {
+					System.out.println("EMPATE! Ambos escolheram PAPEL.");
+					empate++;
+				}
+				
+				break;
+				
+			case 2:
+				System.out.println("Você escolheu TESOURA.");
+				
+				if(opcaoPc == 0) {
+					System.out.println("O computador ganhou, mais sorte da próxima vez!");
+					pcGanhou++;
+				} else if(opcaoPc == 1) {
+					System.out.println("Parabéns, você ganhou!");
+					jogGanhou++;
+				} else {
+					System.out.println("EMPATE! Ambos escolheram TESOURA.");
+					empate++;
+				}
+				
+				break;
+				
 			}
 			
 			palavraContinuar = true;
@@ -95,9 +95,8 @@ public class Principal {
 					continuar = false;
 					palavraContinuar = false;
 					
-					System.out.println("\nFIM DE JOGO!");
+					Secundaria.finalJogo(jogGanhou, pcGanhou, empate); // função que retorna as vitórias e empates
 					
-					System.exit(0);
 				} else {
 					System.out.println("\n[ERRO]\nDigite apenas sim ou nao");
 					palavraContinuar = true;
@@ -112,3 +111,5 @@ public class Principal {
 	
 
 }
+	
+
